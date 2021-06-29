@@ -1,3 +1,4 @@
+//Authors: Victoria Berkowitz, Emma Wingreen, Eduardo Leite, Steph Kabanakis, Tiffany Wong
 import java.io.*;
 import java.util.*;
 public class Nim{
