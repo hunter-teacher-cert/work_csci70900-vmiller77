@@ -41,10 +41,15 @@ public class Nim{
 				}
 				
 				// computer's turn to pick a random number of stones, but only if there are that many stones left
-				do {
-				Random random = new Random();
-				stonesTaken = random.nextInt(3) + 1;
-				} while(stones - stonesTaken < 0);
+				if(stones <= 3){
+					//have AI win if possible(take rest of stones if less than 3)
+					stonesTaken = stones;
+				}else{
+					do {
+						Random random = new Random();
+						stonesTaken = random.nextInt(3) + 1;
+					} while(stones - stonesTaken < 0);
+				}
 				
 				//calculate number of stones left and tell user
 				stones = stones - stonesTaken;
