@@ -43,7 +43,7 @@ public class Nim{
 				// computer's turn to pick a random number of stones, but only if there are that many stones left
 				do {
 				Random random = new Random();
-				stonesTaken = random.nextInt(2) + 1;
+				stonesTaken = random.nextInt(3) + 1;
 				} while(stones - stonesTaken < 0);
 				
 				//calculate number of stones left and tell user
