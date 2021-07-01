@@ -13,10 +13,10 @@ import java.util.*;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class Mancala2{
+public class Mancala{
 
   // initialize players mancala and arrays
-  public static int aiMancala = 0;
+  public static int aiMancala = 10;
   public static int playerMancala = 0;
   public static int[] aiPits = new int[] {4, 4, 4, 4, 4, 4};
   public static int[] playerPits = new int[] {4, 4, 4, 4, 4, 4};
@@ -25,16 +25,16 @@ public class Mancala2{
 
   public static void showBoard() {
     // ai
-    System.out.print(aiMancala + " ");
+    System.out.print(aiMancala + "\t");
     for(int i = 0; i < 6; i++) {
-      System.out.print(aiPits[i] + " ");
+      System.out.print(aiPits[i] + "\t");
     }
     System.out.print("\n");
 
     // player
-    System.out.print("  ");
+    System.out.print("\t");
     for(int i = 0; i < 6; i++) {
-      System.out.print(playerPits[i] + " ");
+      System.out.print(playerPits[i] + "\t");
     }
     System.out.println(playerMancala);
   }
@@ -71,14 +71,22 @@ public class Mancala2{
 
   public static void playerTurn() {
     int currentIndex;
+    System.out.println("");
     System.out.print("Which pit would you like to choose from?\n");
     currentIndex = scan.nextInt();
     currentIndex -= 1; // offset for 0-based indexing (pit 1 is index 0)
-    while(checkPitEmpty(currentIndex, playerPits)) { // should also make sure choice is btwn 1-6
-      System.out.println("That pit is empty. Please choose another pit");
+
+    boolean outOfBounds = currentIndex < 0 || currentIndex > 5;
+    while(outOfBounds || checkPitEmpty(currentIndex, playerPits)) { // should also make sure choice is btwn 1-6
+      if(outOfBounds){
+        System.out.println("Please choose a pit from 1 through 6");
+      }else{
+        System.out.println("That pit is empty. Please choose another pit");
+      }
       System.out.print("Which pit would you like to choose from?\n");
       currentIndex = scan.nextInt();
       currentIndex -= 1; // offset for 0-based indexing (pit 1 is index 0)
+      outOfBounds = currentIndex < 0 || currentIndex > 5;
     }
 
     int stonesInHand = playerPits[currentIndex]; // stores # of stones in new variable
@@ -91,10 +99,11 @@ public class Mancala2{
       if(currentIndex == 6){ // reached player Mancala
         stonesInHand--; // transfer from hand...
         playerMancala++; // ...to player mancala
-        if(stonesInHand == 0) { // checks if last stone was put in Mancala
-          System.out.println("Last stone in Mancala. You go again");
-          showBoard();
-          playerTurn(); // recursive call to take another player turn
+        if(stonesInHand == 0 && !allPitsEmpty(playerPits)) { // checks if last stone was put in Mancala && not last move
+            System.out.println("Last stone in Mancala. You go again");
+            System.out.println("");
+            showBoard();
+            playerTurn(); // recursive call to take another player turn
         }
         direction = -1; // set direction variable to opposite direction
       } else if(currentIndex == -1) { // reached aiMancala
@@ -103,7 +112,7 @@ public class Mancala2{
         i--; // prevents accounting for one of the chosenStones loop iterations
       } else { // distribute stones
         if(direction == 1) { // player's pits
-          if(checkPitEmpty(currentIndex , playerPits) && stonesInHand == 1) { // check if last stone put in empty pit
+          if(checkPitEmpty(currentIndex , playerPits) && stonesInHand == 1 && aiPits[currentIndex] != 0) { // check if last stone put in empty pit
             System.out.println("Ended in empty pit on your side. Collect stones from both pits!");
             playerMancala += (aiPits[currentIndex] + 1); // add both pits at that index to player mancala
             aiPits[currentIndex] = 0; // set ai mirror pit to zero
@@ -134,8 +143,9 @@ public class Mancala2{
       if(currentIndex == -1){ // reached ai Mancala
         stonesInHand--; // transfer from hand...
         aiMancala++; // ...to ai mancala
-        if(stonesInHand == 0) { // checks if last stone was put in Mancala
+        if(stonesInHand == 0 && !allPitsEmpty(aiPits)) { // checks if last stone was put in Mancala && not last move
           System.out.println("Last stone in Mancala. AI goes again");
+          System.out.println("");
           showBoard();
           aiTurn(); // recursive call to take another ai turn
         }
@@ -146,7 +156,7 @@ public class Mancala2{
         i--; // prevents accounting for one of the chosenStones loop iterations
       } else { // distribute stones
         if(direction == -1) { // ai's pits
-          if(checkPitEmpty(currentIndex , aiPits) && stonesInHand == 1) { // check if last stone put in empty pit
+          if(checkPitEmpty(currentIndex , aiPits) && stonesInHand == 1 && playerPits[currentIndex] != 0) { // check if last stone put in empty pit
             System.out.println("Ended in empty pit on AI side. Collect stones from both pits!");
             aiMancala += (playerPits[currentIndex] + 1); // add both pits at that index to ai mancala
             playerPits[currentIndex] = 0; // set player mirror pit to zero
@@ -174,6 +184,7 @@ public class Mancala2{
         didYouWin(playerMancala, aiMancala); // displays game outcome
         break;
       }
+
       aiTurn();
       System.out.println("AI Turn: ");
       showBoard();
