@@ -111,9 +111,12 @@ public class SortDemo{
 	// loop through the ArrayList data
 	// and if the value you're searchign for is in the ArrayList, return it.
 	// return -1 if it isn't there.
-
-
-	return 0; // replace this return
+    for (int i=0;i < data.size(); i++){
+            if(data.get(i) == value){
+              return i;
+            }
+          }
+          return -1; // replace this return
     }
 
     /* If you finish the lab early you can get started on this */
