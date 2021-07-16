@@ -1,53 +1,106 @@
 import java.io.*;
 import java.util.*;
-// victoria , eric, steph
+
 public class Driver{
     public static void main(String[] args) {
-
-    /* Node n;
-  	n = new Node();
-  	n.setData("Eduardo");
-  	Node n2 = new Node("Brian");
-  	n.setNext(n2);
-  	System.out.println(n);
-  	System.out.println(n2);
-  	System.out.println(n.getNext());
-  	n.getNext().setNext(new Node("Steph"));
-  	System.out.println(n2.getNext());
-  	System.out.println(n.getNext().getNext());
-  	//created the new nodes / list
-  	Node L;
-  	L = new Node();
-  	L.setData("a");
-  	Node L2 = new Node("b");
-  	Node L3 = new Node("c");
-  	Node L4 = new Node("d");
-  	System.out.println(L);
-  	System.out.println(L2);
-  	System.out.println(L3);
-  	System.out.println(L4);
-  	// Set up the order
-  	L.setNext(L2);
-  	L2.setNext(L3);
-  	L3.setNext(L4);
-  	System.out.println(L.getNext());
-  	//insert x between b & c
-  	Node x;
-  	x = new Node("x");
-  	x.setNext(L3);
-  	L2.setNext(x);
-  	System.out.print(L2.getNext() + "-->");
-  	System.out.println(x.getNext());
-  	//delete c from the mix
-  	//to have x point to d. therefore we remove c.
-  	x.setNext(L4);
-  	System.out.print(L2.getNext() + "-->");
-  	System.out.println(x.getNext() + "-->");
-  	System.out.println("Final Link List" );
-  	System.out.print(L + " -->" + L.getNext() + "-->" + L.getNext().getNext() + "-->" + L.getNext().getNext().getNext() + "-->" + L.getNext().getNext().getNext().getNext() );
-    */
+	Node n;
+	n = new Node();
+	n.setData("Eduardo");
 
 
-    
+	Node n2 = new Node("Brian");
+	n.setNext(n2);
+
+	System.out.println(n);
+
+	System.out.println(n2);
+
+	System.out.println(n.getNext());
+	n.getNext().setNext(new Node("Steph"));
+	System.out.println(n2.getNext());
+	System.out.println(n.getNext().getNext());
+
+	// 1.Create a new  list that looks like:
+	//   L->"a"->"b"->"c"->"d"
+	// 2. Write the code to insert an "x"
+	//    between the b and the c
+	// 3. Write the code to delete the c
+
+
+	//1
+	Node L;
+	Node a = new Node("a");
+	Node b = new Node("b");
+	Node c = new Node("c");
+	Node d = new Node("d");
+	Node e = new Node("e");
+
+	L=a;
+	a.setNext(b);
+	b.setNext(c);
+	c.setNext(d);
+	d.setNext(e);
+	System.out.println("Part 1:");
+	// remember not to lose the head / start
+	// of the list - make a copy
+	Node currentNode;
+	currentNode = L;
+	while (currentNode != null){
+	    System.out.print(currentNode+"->");
+	    // this is like i=i+1 is for arrays
+	    // but for linked lists
+	    currentNode = currentNode.getNext();
+	}
+	System.out.println("null");
+
+	//2
+	Node x = new Node("X");
+	x.setNext(c);
+	b.setNext(x);
+	System.out.println("Part 2:");
+	currentNode = L;
+	while (currentNode != null){
+	    System.out.print(currentNode+"->");
+	    // this is like i=i+1 is for arrays
+	    // but for linked lists
+	    currentNode = currentNode.getNext();
+	}
+	System.out.println("null");
+
+	//3
+	b.setNext(d);
+	currentNode = L;
+	while (currentNode != null){
+	    System.out.print(currentNode+"->");
+	    // this is like i=i+1 is for arrays
+	    // but for linked lists
+	    currentNode = currentNode.getNext();
+	}
+	System.out.println("null");
+
+	/* Or:
+	   L = new Node("a");
+	   L.setNext(new Node("B"));
+	   L.getNext().setNext(new Node("C"));
+	   L.getNext().getNext().setNext(new Node("D"));
+	   etc
+	*/
+
+	System.out.println("\n");
+	System.out.println("Llist");
+	System.out.println("-----------");
+
+	Llist ll = new Llist();
+	System.out.println(ll);
+
+	ll.addFront("a");
+	System.out.println(ll);
+
+
+	ll.addFront("b");
+	System.out.println(ll);
+
+	ll.addFront("c");
+	System.out.println(ll);
     }
 }
