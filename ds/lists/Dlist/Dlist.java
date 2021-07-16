@@ -34,7 +34,7 @@ public class Dlist{
           back = newNode;
         }else{
           //pointing the old front node back to new node
-          front.getNext().setPrev(newNode);
+          newNode.getNext().setPrev(newNode);
         }
 
 
