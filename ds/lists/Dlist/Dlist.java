@@ -45,9 +45,15 @@ public class Dlist{
     public void addBack(String data){
         // make the new node
         Node newNode = new Node(data);
+        
         newNode.setPrev(back);
-        newNode.getPrev().setNext(newNode);
+
         back = newNode;
+        if(front==null){
+          front = newNode;
+        }else{
+          newNode.getPrev().setNext(newNode);
+        }
 
     }//end addBack()
 
