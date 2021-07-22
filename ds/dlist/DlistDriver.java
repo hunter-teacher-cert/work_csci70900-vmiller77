@@ -30,7 +30,9 @@ public class DlistDriver{
         n.addBack("c");
         System.out.println(n);
         System.out.println("Back:"+n.toStringBack());
-
+        n.remove(1);
+        System.out.println(n);
+        System.out.println("Back:"+n.toStringBack());
 
 
 
