@@ -92,9 +92,7 @@ public class BSTree {
       while(replacement.getRight() != null){
         replacement = replacement.getRight();
       }
-      // //store it in temp
-      // TreeNode temp = new TreeNode(replacement.getValue());
-
+      
       //delete the replacement
       delete(replacement.getValue());
 
