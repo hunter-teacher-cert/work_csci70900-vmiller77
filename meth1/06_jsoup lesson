@@ -1,0 +1,14 @@
+- have students choose a website( have some backup options available)
+- have them explore that website
+- show them how to use Chrome inspection to look at raw HTML and class
+- do a small demo with them explaining different aspects of the website
+- let them explore website using inspection
+- have them pick something they want to scrape of the website
+
+- have them load and set up all JSoup jar and example file
+- walk them through code and what it means(Wikipedia)
+- Have them change out the site to what they want
+- have them understand the selection portion and what those characters means
+- Have them go back to the website of their choice and find the item they want to scrape and look at it's HTML and CSS properties
+- Do a demo showing them how you would replace your searching portion with what you want to scrape
+- Have them work on this trying to do on their own
